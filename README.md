@@ -11,7 +11,7 @@ Criação de aplicativo através do android studio pela linguagem Kotlin.
 O principal objetivo na aplicação é aprendizagem. 
 
   
-[Clique aqui para ser redirecionado para o respositório do backend.](https://github.com/pfelipe96/projeto-Backend-Android/)
+[Clique aqui para ser redirecionado para o respositório do backend.](https://github.com/pfelipe96/projeto-BackendAndroid/)
 
       
  
