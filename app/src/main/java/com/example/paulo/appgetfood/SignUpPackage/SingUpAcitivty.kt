@@ -9,15 +9,20 @@ import com.example.paulo.appgetfood.R
 import com.example.paulo.appgetfood.SignUpPackage.SingUpViewModel.OnResponseSingUp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.toolbar.*
 
 class SingUpAcitivty : AppCompatActivity() {
 
     lateinit var mAuth: FirebaseAuth
     lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     lateinit var mGetValueFirebase : OnResponseSingUp
+    lateinit var mToolbar: android.support.v7.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mToolbar = toolbar
+        mToolbar.title = getString(R.string.title_toolbar_singup)
+        setSupportActionBar(mToolbar)
 
         mAuth = FirebaseAuth.getInstance()
         mAuthListener  = FirebaseAuth.AuthStateListener {

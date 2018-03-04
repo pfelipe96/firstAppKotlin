@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.paulo.appgetfood.SignUpPackage.SingUpAcitivty">
@@ -12,51 +14,129 @@
             />
     </data>
 
-
-    <LinearLayout
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="16dp">
+        android:background="@color/black">
 
-        <android.support.design.widget.TextInputLayout
+        <include layout="@layout/toolbar"></include>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_text_email_login"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite seu e-mail"
-                android:inputType="textEmailAddress"
-                android:text="@{viewModel.emailRegister}"
-                android:addTextChangedListener="@{viewModel.watcherEmailRegister}"/>
+                android:orientation="horizontal">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/accent">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
-            app:counterMaxLength="8">
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/edit_text_first_name_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nome"
+                        android:inputType="textEmailAddress"
+                        android:text="@{viewModel.firstNameRegister}"
+                        android:addTextChangedListener="@{viewModel.watcherFirstNameRegister}"
+                        style="@style/EditTextText"
+                        />
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_text_password_login"
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/accent">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/edit_text_last_name_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Sobre nome"
+                        android:inputType="textEmailAddress"
+                        android:text="@{viewModel.lastNameRegister}"
+                        android:addTextChangedListener="@{viewModel.watcherLastNameRegister}"
+                        style="@style/EditTextText"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Digite seu e-mail"
-                android:maxLength="8"
-                android:inputType="textPassword"
-                android:text="@{viewModel.passwordRegister}"
-                android:addTextChangedListener="@{viewModel.watcherPasswordRegister}" />
+                android:textColorHint="@color/accent">
 
-        </android.support.design.widget.TextInputLayout>
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_text_phone_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite seu celular"
+                    android:inputType="textEmailAddress"
+                    android:text="@{viewModel.phoneRegister}"
+                    android:addTextChangedListener="@{viewModel.watcherPhoneRegister}"
+                    style="@style/EditTextText"
+                    />
 
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:onClick="@{viewModel::onButtonRegisterClick}"
-            android:text="Cadastrar"/>
+            </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/accent">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_text_email_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite seu e-mail"
+                    android:inputType="textEmailAddress"
+                    android:text="@{viewModel.emailRegister}"
+                    android:addTextChangedListener="@{viewModel.watcherEmailRegister}"
+                    style="@style/EditTextText"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/accent"
+                app:counterMaxLength="8"
+                android:textColorHint="@color/accent">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_text_password_register"
+                    android:hint="Digite uma senha de sua preferência"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="8"
+                    android:inputType="textPassword"
+                    android:text="@{viewModel.passwordRegister}"
+                    android:addTextChangedListener="@{viewModel.watcherPasswordRegister}"
+                    style="@style/EditTextText"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:onClick="@{viewModel::onButtonRegisterClick}"
+                android:text="Cadastrar"
+                style="@style/RaisedButton"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.LinearLayoutCompat>
 </layout>
