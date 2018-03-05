@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Get Food</string>
-    <string name="title_toolbar_singup">Cadastro para login</string>
+    <string name="title_toolbar_singup">Cadastro</string>
+
+    <string name="facebook_app_id">2087264011503841</string>
+    <string name="fb_login_protocol_scheme">fb2087264011503841</string>
+    <string name="firebase_uri_auth">https://appgetfood.firebaseapp.com/__/auth/handler</string>
 </resources>

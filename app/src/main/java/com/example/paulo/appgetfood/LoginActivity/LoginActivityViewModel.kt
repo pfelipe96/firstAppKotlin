@@ -1,27 +1,25 @@
 package com.example.paulo.appgetfood.LoginActivity
 
+import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.databinding.ObservableField
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.text.TextWatcher
 import android.text.Editable
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
-import android.content.ContentValues
 import android.content.Intent
 import com.example.paulo.appgetfood.SignUpPackage.SingUpAcitivty
+import com.facebook.login.LoginManager
+import com.facebook.login.widget.LoginButton
 
 
 /**
  * Created by paulo on 25/02/18.
  */
-class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth){
+class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth, var activity: Activity){
 
     var email:ObservableField<String> = ObservableField()
     var password:ObservableField<String> = ObservableField()
@@ -38,6 +36,9 @@ class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth){
        mContext.startActivity(Intent(mContext, SingUpAcitivty::class.java))
     }
 
+    fun onButtonClickFacebook(view : View){
+        mOnResponse.sendAuthFacebookSingUp(view)
+    }
     var watcherEmail: TextWatcher = object : TextWatcher {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
@@ -71,14 +72,13 @@ class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth){
 
     interface OnResponseLogin {
         fun sendAuthFirebaseSingUp(email: String, password: String)
+        fun sendAuthFacebookSingUp(view: View)
     }
 
 
     fun initializeListener(onResponse: OnResponseLogin){
         mOnResponse = onResponse
     }
-
-
 }
 
 

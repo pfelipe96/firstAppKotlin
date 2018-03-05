@@ -1,24 +1,28 @@
 package com.example.paulo.appgetfood.SignUpPackage
 
+import android.app.Activity
+import android.content.Context
 import android.databinding.ObservableField
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import java.util.*
 
+
 /**
  * Created by paulo on 02/03/18.
  */
-class SingUpViewModel{
+class SingUpViewModel(var activity: Activity, var context: Context){
+    lateinit var mOnResponse: OnResponseSingUp
+
     var emailRegister: ObservableField<String> = ObservableField()
     var passwordRegister: ObservableField<String> = ObservableField()
     var firstNameRegister: ObservableField<String> = ObservableField()
     var lastNameRegister: ObservableField<String> = ObservableField()
     var phoneRegister: ObservableField<String> = ObservableField()
-
-    lateinit var mOnResponse: OnResponseSingUp
 
     var watcherEmailRegister: TextWatcher = object : TextWatcher {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -104,5 +108,11 @@ class SingUpViewModel{
     fun initializeListener(onResponse: OnResponseSingUp){
         mOnResponse = onResponse
     }
+
+    fun setToolbar(appCompatActivity: AppCompatActivity, toolBar: android.support.v7.widget.Toolbar){
+        appCompatActivity.setSupportActionBar(toolBar)
+//        appCompatActivity.supportActionBar.setDefaultDisplayHomeAsUpEnabled(true)
+    }
+
 
 }

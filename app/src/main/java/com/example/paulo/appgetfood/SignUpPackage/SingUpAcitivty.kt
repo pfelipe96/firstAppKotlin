@@ -1,9 +1,11 @@
 package com.example.paulo.appgetfood.SignUpPackage
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.example.paulo.appgetfood.BR
 import com.example.paulo.appgetfood.R
 import com.example.paulo.appgetfood.SignUpPackage.SingUpViewModel.OnResponseSingUp
@@ -13,16 +15,13 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class SingUpAcitivty : AppCompatActivity() {
 
-    lateinit var mAuth: FirebaseAuth
-    lateinit var mAuthListener: FirebaseAuth.AuthStateListener
-    lateinit var mGetValueFirebase : OnResponseSingUp
-    lateinit var mToolbar: android.support.v7.widget.Toolbar
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
+    private lateinit var mGetValueFirebase : OnResponseSingUp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mToolbar = toolbar
-        mToolbar.title = getString(R.string.title_toolbar_singup)
-        setSupportActionBar(mToolbar)
+
 
         mAuth = FirebaseAuth.getInstance()
         mAuthListener  = FirebaseAuth.AuthStateListener {
@@ -32,7 +31,8 @@ class SingUpAcitivty : AppCompatActivity() {
             }
         }
 
-        val singUpViewModel = SingUpViewModel()
+        val singUpViewModel = SingUpViewModel(this@SingUpAcitivty, this)
+
 
         val binding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_sing_up_acitivty)
         binding.setVariable(BR.viewModel, singUpViewModel)
@@ -50,7 +50,7 @@ class SingUpAcitivty : AppCompatActivity() {
         }
 
         singUpViewModel.initializeListener(mGetValueFirebase)
-
+        singUpViewModel.setToolbar(this, toolbarID)
 
     }
 
@@ -62,5 +62,12 @@ class SingUpAcitivty : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         mAuth.removeAuthStateListener { mAuthListener }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            android.R.id.home -> onBackPressed()
+        }
+        return true
     }
 }
