@@ -5,4 +5,7 @@
     <string name="facebook_app_id">2087264011503841</string>
     <string name="fb_login_protocol_scheme">fb2087264011503841</string>
     <string name="firebase_uri_auth">https://appgetfood.firebaseapp.com/__/auth/handler</string>
+
+    <string name="firebase_google_auth">project-151405993206</string>
+    <string name="key_api_google_auth">AIzaSyCZplDMTuzlm9vvKsizPQnD4jk5ZLSyW6Q</string>
 </resources>

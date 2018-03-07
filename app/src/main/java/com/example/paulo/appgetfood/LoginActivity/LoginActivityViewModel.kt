@@ -39,6 +39,11 @@ class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth, va
     fun onButtonClickFacebook(view : View){
         mOnResponse.sendAuthFacebookSingUp(view)
     }
+
+    fun onButtonClickGoogle(view : View){
+        mOnResponse.sendAuthGoogleSingUp(view)
+    }
+
     var watcherEmail: TextWatcher = object : TextWatcher {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
@@ -73,6 +78,7 @@ class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth, va
     interface OnResponseLogin {
         fun sendAuthFirebaseSingUp(email: String, password: String)
         fun sendAuthFacebookSingUp(view: View)
+        fun sendAuthGoogleSingUp(view: View)
     }
 
 

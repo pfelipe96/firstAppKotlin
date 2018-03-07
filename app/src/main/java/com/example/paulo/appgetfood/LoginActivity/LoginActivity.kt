@@ -16,11 +16,18 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 class LoginActivity : AppCompatActivity() {
@@ -28,12 +35,14 @@ class LoginActivity : AppCompatActivity() {
     lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     lateinit var mGetValueFirebase : LoginActivityViewModel.OnResponseLogin
     lateinit var mCallbackManager: CallbackManager
+    val sRC_SIGN_IN = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         FirebaseApp.initializeApp(this)
+
 
         mAuth = FirebaseAuth.getInstance()
         mAuthListener  = FirebaseAuth.AuthStateListener {
@@ -62,6 +71,17 @@ class LoginActivity : AppCompatActivity() {
 
             override fun sendAuthFacebookSingUp(view: View) {
                 LoginManager.getInstance().logInWithReadPermissions(this@LoginActivity, listOf("email", "public_profile"))
+            }
+
+            override fun sendAuthGoogleSingUp(view: View) {
+                val mGso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build()
+
+                val mGoogleSignInClient = GoogleSignIn.getClient(this@LoginActivity, mGso)
+                val signIntent = mGoogleSignInClient.signInIntent
+                startActivityForResult(signIntent, sRC_SIGN_IN)
             }
         }
 
@@ -94,9 +114,9 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this@LoginActivity,
                 {task ->
                     if(task.isSuccessful){
-                        Log.v("Sucess", "ok")
+                        Log.v("Sucess", task.exception!!.message)
                     }else{
-                        Log.v("Failed", "bad")
+                        Log.v("Failed", task.exception!!.message)
                     }
                 }
         )
@@ -104,7 +124,33 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        mCallbackManager!!.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == sRC_SIGN_IN){
+            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+            if(result.isSuccess) {
+                val account = result.signInAccount as GoogleSignInAccount
+                firebaseAuthWithGoogle(account)
+            }else{
+                Log.v("Failed", "bad")
+            }
+        }else {
+            mCallbackManager!!.onActivityResult(requestCode, resultCode, data)
+        }
+
+    }
+
+    fun firebaseAuthWithGoogle(account: GoogleSignInAccount){
+        Log.v("WithGoogle", account!!.id )
+
+        val credential = GoogleAuthProvider.getCredential(account.id, null)
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this,
+                {task ->
+                   if(task.isSuccessful){
+                       Log.v("Sucess", task.exception!!.message)
+                   }else{
+                       Log.v("Failed", task.exception!!.message)
+                   }
+                }
+        )
     }
 
     override fun onStart() {
