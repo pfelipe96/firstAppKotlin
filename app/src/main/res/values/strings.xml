@@ -8,4 +8,7 @@
 
     <string name="firebase_google_auth">project-151405993206</string>
     <string name="key_api_google_auth">AIzaSyCZplDMTuzlm9vvKsizPQnD4jk5ZLSyW6Q</string>
+    <string name="open_drawer">Abrir</string>
+    <string name="close_drawer">Fechar</string>
+    <string name="empty" />
 </resources>

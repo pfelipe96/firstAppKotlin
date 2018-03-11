@@ -3,12 +3,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.paulo.appgetfood.LoginActivity.LoginActivity">
+    tools:context="com.example.paulo.appgetfood.LoginPackage.LoginActivity">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.paulo.appgetfood.LoginActivity.LoginActivityViewModel"
+            type="com.example.paulo.appgetfood.LoginPackage.LoginViewModel"
             />
     </data>
 

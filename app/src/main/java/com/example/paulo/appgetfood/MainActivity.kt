@@ -3,7 +3,7 @@ package com.example.paulo.appgetfood
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.paulo.appgetfood.LoginActivity.LoginActivity
+import com.example.paulo.appgetfood.LoginPackage.LoginActivity
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.FirebaseApp

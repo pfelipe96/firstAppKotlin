@@ -1,4 +1,4 @@
-package com.example.paulo.appgetfood.LoginActivity
+package com.example.paulo.appgetfood.LoginPackage
 
 import android.app.Activity
 import android.content.Context
@@ -12,14 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 import android.content.Intent
 import com.example.paulo.appgetfood.SignUpPackage.SingUpAcitivty
-import com.facebook.login.LoginManager
-import com.facebook.login.widget.LoginButton
 
 
 /**
  * Created by paulo on 25/02/18.
  */
-class LoginActivityViewModel(var mContext: Context, var mAuth : FirebaseAuth, var activity: Activity){
+class LoginViewModel(var mContext: Context, var mAuth : FirebaseAuth, var activity: Activity){
 
     var email:ObservableField<String> = ObservableField()
     var password:ObservableField<String> = ObservableField()

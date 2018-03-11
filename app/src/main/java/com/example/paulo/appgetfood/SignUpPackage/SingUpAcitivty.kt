@@ -1,5 +1,4 @@
 package com.example.paulo.appgetfood.SignUpPackage
-import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.app.AppCompatActivity

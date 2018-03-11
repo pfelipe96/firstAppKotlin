@@ -1,14 +1,14 @@
-package com.example.paulo.appgetfood.LoginActivity
+package com.example.paulo.appgetfood.LoginPackage
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.JsonToken
 import android.util.Log
 import android.view.View
 import com.example.paulo.appgetfood.BR
+import com.example.paulo.appgetfood.HomePackage.HomeActivity
 import com.example.paulo.appgetfood.R
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -20,9 +20,6 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +30,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 class LoginActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
     lateinit var mAuthListener: FirebaseAuth.AuthStateListener
-    lateinit var mGetValueFirebase : LoginActivityViewModel.OnResponseLogin
+    lateinit var mGetValueFirebase : LoginViewModel.OnResponseLogin
     lateinit var mCallbackManager: CallbackManager
     val sRC_SIGN_IN = 100
 
@@ -52,11 +49,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        val loginActivityViewModel = LoginActivityViewModel(this, mAuth, this@LoginActivity)
+        val loginActivityViewModel = LoginViewModel(this, mAuth, this@LoginActivity)
         val binding = DataBindingUtil.setContentView<ViewDataBinding>(this, R.layout.activity_login)
         binding.setVariable(BR.viewModel, loginActivityViewModel)
 
-        mGetValueFirebase = object : LoginActivityViewModel.OnResponseLogin{
+        mGetValueFirebase = object : LoginViewModel.OnResponseLogin{
             override fun sendAuthFirebaseSingUp(email: String, password: String) {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this@LoginActivity,
                         { task ->
@@ -149,7 +146,9 @@ class LoginActivity : AppCompatActivity() {
                    }else{
                        Log.v("Failed", task.exception!!.message)
                    }
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                 }
+
         )
     }
 

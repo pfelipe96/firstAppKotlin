@@ -111,7 +111,8 @@ class SingUpViewModel(var activity: Activity, var context: Context){
 
     fun setToolbar(appCompatActivity: AppCompatActivity, toolBar: android.support.v7.widget.Toolbar){
         appCompatActivity.setSupportActionBar(toolBar)
-//        appCompatActivity.supportActionBar.setDefaultDisplayHomeAsUpEnabled(true)
+        appCompatActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        appCompatActivity.supportActionBar!!.setDisplayShowHomeEnabled(true)
     }
 
 
