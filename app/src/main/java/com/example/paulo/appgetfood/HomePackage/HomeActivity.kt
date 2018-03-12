@@ -22,5 +22,19 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.setToolbar(this@HomeActivity, toolbarID)
         homeViewModel.setNavDrawer(this@HomeActivity, drawer_layout, toolbarID, navView)
 
+        var mDataSet =
+                arrayListOf(
+                        ConstructorSetCard("http://2.bp.blogspot.com/-IaVdp4HLbQY/Uuqk01E-C1I/AAAAAAABOjM/xs-M3CSonWA/s1600/wendys+logo.jpg", "Wendy's", "Vila Olimpia"),
+                        ConstructorSetCard("https://i.pinimg.com/originals/37/d1/db/37d1db27632f1df71b90dd85888a4358.jpg", "McDonald's", "Brooklin"),
+                        ConstructorSetCard("https://www.festisite.com/static/partylogo/img/logos/burger-king.png", "Buger King", "Moema"))
+
+        val adapterRecyclerHome = AdapterRecyclerHome(this, this, mDataSet)
+
+        homeViewModel.setRecyclerView(recycler_view_home, adapterRecyclerHome)
+
     }
+
 }
+
+class ConstructorSetCard(var imageURl: String, var nameBusiness: String, var adressBusiness: String)
+

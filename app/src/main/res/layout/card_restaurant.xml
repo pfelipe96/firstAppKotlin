@@ -5,7 +5,10 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:elevation="8dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +23,7 @@
             android:id="@+id/image_card"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/wendys_logo"/>
+            android:layout_marginRight="12dp" />
 
         <TextView
             android:layout_marginTop="4dp"
@@ -31,7 +33,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="Wend's Restaurant"
             />
 
         <TextView
@@ -41,7 +42,6 @@
             android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Avenida Roque Petroni"
             />
 
         <android.support.v7.widget.AppCompatButton
