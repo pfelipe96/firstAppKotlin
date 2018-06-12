@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.example.paulo.appgetfood.R
 
@@ -23,7 +24,7 @@ class HomeViewHolder(var activity: Activity, var context: Context): NavigationVi
     }
 
 
-    fun setNavDrawer(appCompatActivity: AppCompatActivity,navDrawer: DrawerLayout, toolBar: android.support.v7.widget.Toolbar, navView: NavigationView){
+    fun setNavDrawer(appCompatActivity: AppCompatActivity, navDrawer: DrawerLayout, toolBar: Toolbar, navView: NavigationView){
         mNavDrawerLayout = navDrawer
         val toogle = ActionBarDrawerToggle(appCompatActivity, navDrawer, toolBar, R.string.open_drawer, R.string.close_drawer)
         mNavDrawerLayout.addDrawerListener(toogle)

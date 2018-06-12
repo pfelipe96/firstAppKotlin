@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.paulo.appgetfood.BR
 import com.example.paulo.appgetfood.R
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
