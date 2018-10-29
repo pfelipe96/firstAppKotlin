@@ -25,8 +25,8 @@ class LoginViewModel(var mContext: Context, var mAuth : FirebaseAuth, var activi
 
 
     fun onButtonClick(view : View){
-        if(!email!!.get().isNullOrEmpty() && !password!!.get().isNullOrEmpty())
-            mOnResponse.sendAuthFirebaseSingUp(email.get(), password.get())
+        if(!email.get().isNullOrEmpty() && !password.get().isNullOrEmpty())
+            email.get()?.let { email -> password.get()?.let { password -> mOnResponse.sendAuthFirebaseSingUp(email, password) } }
     }
 
 

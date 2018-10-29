@@ -97,8 +97,8 @@ class SingUpViewModel(var activity: Activity, var context: Context){
 
 
     fun onButtonRegisterClick(view : View){
-        if(!emailRegister!!.get().isNullOrEmpty() && !passwordRegister!!.get().isNullOrEmpty())
-            mOnResponse.sendAuthFirebaseCreateUser(emailRegister.get(), passwordRegister.get())
+        if(!emailRegister.get().isNullOrEmpty() && !passwordRegister.get().isNullOrEmpty())
+            emailRegister.get()?.let {email -> passwordRegister.get()?.let { password -> mOnResponse.sendAuthFirebaseCreateUser(email, password) } }
     }
 
     interface OnResponseSingUp{
