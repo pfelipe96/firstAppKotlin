@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseApp.initializeApp(this)
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(applicationContext);
         AppEventsLogger.activateApp(this);
 
         startActivity(Intent(this, LoginActivity::class.java))

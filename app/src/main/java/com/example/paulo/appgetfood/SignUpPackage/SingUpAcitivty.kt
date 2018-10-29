@@ -23,10 +23,10 @@ class SingUpAcitivty : AppCompatActivity() {
 
 
         mAuth = FirebaseAuth.getInstance()
-        mAuthListener  = FirebaseAuth.AuthStateListener {
-            var user : FirebaseUser = it.currentUser!!
-            user?.let {
-                Log.v("Entrou", "Entrou "+user.uid)
+        mAuthListener  = FirebaseAuth.AuthStateListener { it ->
+            val user : FirebaseUser? = it.currentUser
+            user.let {
+                Log.v("Entrou", "Entrou ${user?.uid}")
             }
         }
 
@@ -38,13 +38,13 @@ class SingUpAcitivty : AppCompatActivity() {
 
         mGetValueFirebase = object : SingUpViewModel.OnResponseSingUp{
             override fun sendAuthFirebaseCreateUser(email: String, password: String) {
-               mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this@SingUpAcitivty, { task ->
-                           if(task.isSuccessful){
-                               Log.v("Sucess", "ok")
-                           }else{
-                               Log.v("Failed", "bad")
-                           }
-                       })
+               mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this@SingUpAcitivty) { task ->
+                   if(task.isSuccessful){
+                       Log.v("Sucess", "ok")
+                   }else{
+                       Log.v("Failed", "bad")
+                   }
+               }
             }
         }
 

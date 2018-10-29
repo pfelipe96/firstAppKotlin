@@ -32,20 +32,21 @@ class LoginActivity : AppCompatActivity() {
     lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     lateinit var mGetValueFirebase : LoginViewModel.OnResponseLogin
     lateinit var mCallbackManager: CallbackManager
-    val sRC_SIGN_IN = 100
 
+    companion object {
+        private const val sRC_SIGN_IN = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         FirebaseApp.initializeApp(this)
 
-
         mAuth = FirebaseAuth.getInstance()
-        mAuthListener  = FirebaseAuth.AuthStateListener {
-            var user : FirebaseUser = it.currentUser!!
-            user?.let {
-                Log.v("Entrou", "Entrou "+user.uid)
+        mAuthListener  = FirebaseAuth.AuthStateListener { it ->
+            val user : FirebaseUser? = it.currentUser
+            user.let {
+                Log.v("Entrou", "Entrou ${it?.uid}")
             }
         }
 
@@ -55,14 +56,14 @@ class LoginActivity : AppCompatActivity() {
 
         mGetValueFirebase = object : LoginViewModel.OnResponseLogin{
             override fun sendAuthFirebaseSingUp(email: String, password: String) {
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this@LoginActivity,
-                        { task ->
-                            if(task.isSuccessful){
-                                Log.v("Sucess", "ok")
-                            }else{
-                                Log.v("Failed", "bad")
-                            }
-                        })
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this@LoginActivity
+                ) { task ->
+                    if(task.isSuccessful){
+                        Log.v("Sucess", "ok")
+                    }else{
+                        Log.v("Failed", "bad")
+                    }
+                }
 
             }
 
@@ -108,15 +109,14 @@ class LoginActivity : AppCompatActivity() {
 
     fun handleFacebookAcessToken(token: AccessToken){
         val credential = FacebookAuthProvider.getCredential(token.token)
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this@LoginActivity,
-                {task ->
-                    if(task.isSuccessful){
-                        Log.v("Sucess", task.exception!!.message)
-                    }else{
-                        Log.v("Failed", task.exception!!.message)
-                    }
-                }
-        )
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this@LoginActivity
+        ) { task ->
+            if(task.isSuccessful){
+                Log.v("Sucess", task.exception?.message)
+            }else{
+                Log.v("Failed", task.exception?.message)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.v("Failed", "bad")
             }
         }else {
-            mCallbackManager!!.onActivityResult(requestCode, resultCode, data)
+            mCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
 
     }
@@ -139,17 +139,16 @@ class LoginActivity : AppCompatActivity() {
         Log.v("WithGoogle", account!!.id )
 
         val credential = GoogleAuthProvider.getCredential(account.id, null)
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this,
-                {task ->
-                   if(task.isSuccessful){
-                       Log.v("Sucess", task.exception!!.message)
-                   }else{
-                       Log.v("Failed", task.exception!!.message)
-                   }
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-                }
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this
 
-        )
+        ) { task ->
+            if(task.isSuccessful){
+                Log.v("Sucess", task.exception?.message)
+            }else{
+                Log.v("Failed", task.exception?.message)
+            }
+            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+        }
     }
 
     override fun onStart() {
